@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -36,30 +37,56 @@ const techGroups = [
   },
 ]
 
+const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
+const animalStoreDemoUrl = 'https://animal-store.onrender.com/'
+
 const projects = [
   {
     title: 'Gift Suggestion Platform',
     description:
       'Full stack application for generating personalized gift ideas. Built with Python, Flask, JavaScript, React, SQLAlchemy, and third-party integrations.',
     stack: ['React', 'JavaScript', 'Python', 'Flask', 'SQLAlchemy', 'Gemini API'],
-    demo: 'https://sample-service-name-e9kt.onrender.com/',
+    demo: giftDemoUrl,
     repo: 'https://github.com/Harold1Maldonado',
   },
   {
-    title: 'Project Placeholder',
+    title: 'Animal Store',
     description:
-      'Replace this card with your next strongest project. Add a clear result, the technical challenge, and what part you owned end to end.',
-    stack: ['React', 'REST API', 'JWT'],
-    demo: '#',
+      'E-commerce style project focused on pet products with product catalog, shopping flow, and responsive UI for real users.',
+    stack: ['React', 'JavaScript', 'REST API', 'Responsive UI'],
+    demo: animalStoreDemoUrl,
     repo: 'https://github.com/Harold1Maldonado',
+  },
+  {
+    title: 'Landing Page - Agencia de Viajes',
+    description:
+      'Landing page de pago para agencia de turismo/viajes, optimizada para presentar servicios, captar clientes y mejorar conversión.',
+    stack: ['React', 'JavaScript', 'UI/UX', 'Landing Design'],
+    demo: '#',
+    repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
+  },
+  {
+    title: 'MindFullSleep (Android)',
+    description:
+      'Aplicación Android para relajación y sueño con sonidos de naturaleza y meditaciones guiadas para mejorar descanso y bienestar.',
+    stack: ['Kotlin', 'Android Studio', 'UX Mobile', 'Audio Playback'],
+    demo: '#',
+    repo: 'https://github.com/Harold1Maldonado/MindFullSleep',
   },
 ]
 
 const embeddedProjects = [
   {
-    title: 'Live Project Embed',
-    url: 'https://sample-service-name-e9kt.onrender.com/',
+    title: '4Giift - Live Project',
+    url: giftDemoUrl,
     note: 'Use this section to embed live demos, product prototypes, or public project previews.',
+  },
+  {
+    title: 'Animal Store - Live Project',
+    url: animalStoreDemoUrl,
+    // Nota de error funcional: algunos sitios en Render bloquean iframes por cabeceras de seguridad.
+    // Si esto pasa, el usuario puede abrir el proyecto con el botón "Open Project".
+    note: 'If iframe is blocked by browser security headers, use the Open Project button.',
   },
 ]
 
@@ -95,6 +122,32 @@ function SectionHeading({ eyebrow, title, copy }) {
 }
 
 export default function App() {
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const handleContactChange = (event) => {
+    const { name, value } = event.target
+    setContactForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleContactSubmit = (event) => {
+    event.preventDefault()
+
+    const subject = encodeURIComponent(`Nuevo mensaje de portfolio - ${contactForm.name || 'Sin nombre'}`)
+    const body = encodeURIComponent(
+      `Nombre: ${contactForm.name || 'No especificado'}\n` +
+      `Email: ${contactForm.email || 'No especificado'}\n\n` +
+      `Mensaje:\n${contactForm.message || 'Sin mensaje'}`,
+    )
+
+    // Nota de error funcional: mailto depende del cliente de correo del navegador/SO.
+    // Si el usuario no tiene un cliente configurado, el botón no abrirá redacción automática.
+    window.location.href = `mailto:haroldmaldonado1@gmail.com?subject=${subject}&body=${body}`
+  }
+
   return (
     <div className="min-h-screen bg-grid bg-[size:42px_42px]">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
@@ -238,38 +291,49 @@ export default function App() {
             copy="Use this section to highlight your best work, focusing on technical decisions, real functionality, and your contribution to the final product."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {projects.map((project, index) => (
-              <motion.article
-                key={project.title}
-                className="card p-8"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-sky-400">{project.type || 'Project'}</p>
-                    <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
+            {projects.map((project, index) => {
+              const hasValidDemo = project.demo && project.demo !== '#'
+
+              return (
+                <motion.article
+                  key={project.title}
+                  className="card p-8"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.2em] text-sky-400">{project.type || 'Project'}</p>
+                      <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
+                    </div>
+                    <Code2 className="text-slate-400" />
                   </div>
-                  <Code2 className="text-slate-400" />
-                </div>
-                <p className="mt-5 leading-7 text-slate-300">{project.description}</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {project.stack.map((item) => (
-                    <span key={item} className="badge">{item}</span>
-                  ))}
-                </div>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 font-medium text-slate-950 transition hover:bg-slate-200">
-                    Live Demo <ExternalLink size={16} />
-                  </a>
-                  <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">
-                    Repository <Github size={16} />
-                  </a>
-                </div>
-              </motion.article>
-            ))}
+                  <p className="mt-5 leading-7 text-slate-300">{project.description}</p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {project.stack.map((item) => (
+                      <span key={item} className="badge">{item}</span>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    {hasValidDemo ? (
+                      <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 font-medium text-slate-950 transition hover:bg-slate-200">
+                        Live Demo <ExternalLink size={16} />
+                      </a>
+                    ) : (
+                      // Nota de error funcional: evita enlaces rotos cuando el demo todavía no está publicado.
+                      <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-slate-500/40 px-5 py-3 font-medium text-slate-200">
+                        Demo Pending
+                      </span>
+                    )}
+                    <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">
+                      Repository <Github size={16} />
+                    </a>
+                  </div>
+                </motion.article>
+              )
+            })}
           </div>
         </section>
 
@@ -387,7 +451,38 @@ export default function App() {
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
               I am looking for opportunities where I can contribute as a full stack developer, keep sharpening my frontend and backend skills, and grow into AI-powered product development.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <form className="mt-8 grid gap-4 md:grid-cols-2" onSubmit={handleContactSubmit}>
+              <input
+                type="text"
+                name="name"
+                value={contactForm.name}
+                onChange={handleContactChange}
+                placeholder="Tu nombre"
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={contactForm.email}
+                onChange={handleContactChange}
+                placeholder="Tu correo"
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400"
+                required
+              />
+              <textarea
+                name="message"
+                value={contactForm.message}
+                onChange={handleContactChange}
+                placeholder="Escribe tu mensaje"
+                className="min-h-32 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 md:col-span-2"
+                required
+              />
+              <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400 md:col-span-2 md:justify-self-start">
+                <Mail size={18} /> Enviar a haroldmaldonado1@gmail.com
+              </button>
+            </form>
+            <div className="mt-6 flex flex-wrap gap-4">
               <a href="mailto:haroldmaldonado1@gmail.com" className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400">
                 <Mail size={18} /> haroldmaldonado1@gmail.com
               </a>
