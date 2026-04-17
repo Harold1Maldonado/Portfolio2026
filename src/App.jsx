@@ -133,6 +133,13 @@ const embeddedProjects = [
     // Si esto pasa, el usuario puede abrir el proyecto con el botón "Open Project".
     note: 'If iframe is blocked by browser security headers, use the Open Project button.',
   },
+  {
+    title: 'Animal Store - Live Project',
+    url: animalStoreDemoUrl,
+    // Nota de error funcional: algunos sitios en Render bloquean iframes por cabeceras de seguridad.
+    // Si esto pasa, el usuario puede abrir el proyecto con el botón "Open Project".
+    note: 'If iframe is blocked by browser security headers, use the Open Project button.',
+  },
 ]
 
 const experience = [
