@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -36,34 +37,111 @@ const techGroups = [
   },
 ]
 
+const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
+const animalStoreDemoUrl = 'https://tiendaanimal.onrender.com/'
+
+const translations = {
+  en: {
+    nav: { about: 'About', stack: 'Stack', projects: 'Projects', embeds: 'Embeds', contact: 'Contact' },
+    hero: {
+      role: 'Full Stack Developer · Madrid',
+      title: 'Building modern web experiences with React, Python, Flask, and a growing focus on AI.',
+      copy: 'I create full stack applications with strong fundamentals in frontend and backend development, and I am currently expanding into Next.js, Generative AI, agentic systems, and Kotlin for Android.',
+      viewProjects: 'View Projects',
+      contactMe: 'Contact Me',
+    },
+    project: { liveDemo: 'Live Demo', repo: 'Repository', pending: 'Demo Pending', label: 'Project' },
+    contact: {
+      eyebrow: 'Contact',
+      title: 'Let’s build something valuable.',
+      copy: 'I am looking for opportunities where I can contribute as a full stack developer, keep sharpening my frontend and backend skills, and grow into AI-powered product development.',
+      name: 'Your name',
+      email: 'Your email',
+      message: 'Write your message',
+      send: 'Send Message',
+    },
+    langSwitch: 'ES / EN',
+  },
+  es: {
+    nav: { about: 'Sobre mí', stack: 'Tecnologías', projects: 'Proyectos', embeds: 'Embeds', contact: 'Contacto' },
+    hero: {
+      role: 'Desarrollador Full Stack · Madrid',
+      title: 'Construyendo experiencias web modernas con React, Python, Flask y foco creciente en IA.',
+      copy: 'Creo aplicaciones full stack con bases sólidas en frontend y backend, y actualmente sigo creciendo en Next.js, IA generativa, sistemas agénticos y Kotlin para Android.',
+      viewProjects: 'Ver Proyectos',
+      contactMe: 'Contáctame',
+    },
+    project: { liveDemo: 'Demo en vivo', repo: 'Repositorio', pending: 'Demo pendiente', label: 'Proyecto' },
+    contact: {
+      eyebrow: 'Contacto',
+      title: 'Construyamos algo valioso.',
+      copy: 'Estoy buscando oportunidades donde pueda aportar como desarrollador full stack, seguir perfeccionando frontend y backend, y crecer en productos potenciados por IA.',
+      name: 'Tu nombre',
+      email: 'Tu correo',
+      message: 'Escribe tu mensaje',
+      send: 'Enviar mensaje',
+    },
+    langSwitch: 'EN / ES',
+  },
+}
+
 const projects = [
   {
     title: 'Gift Suggestion Platform',
     description:
       'Full stack application for generating personalized gift ideas. Built with Python, Flask, JavaScript, React, SQLAlchemy, and third-party integrations.',
     stack: ['React', 'JavaScript', 'Python', 'Flask', 'SQLAlchemy', 'Gemini API'],
-    demo: 'https://sample-service-name-e9kt.onrender.com/',
+    demo: giftDemoUrl,
     repo: 'https://github.com/Harold1Maldonado',
   },
   {
-    title: 'Project Placeholder',
+    title: 'Animal Store',
     description:
-      'Replace this card with your next strongest project. Add a clear result, the technical challenge, and what part you owned end to end.',
-    stack: ['React', 'REST API', 'JWT'],
-    demo: '#',
+      'E-commerce style project focused on pet products with product catalog, shopping flow, and responsive UI for real users.',
+    stack: ['React', 'JavaScript', 'REST API', 'Responsive UI'],
+    demo: animalStoreDemoUrl,
     repo: 'https://github.com/Harold1Maldonado',
+  },
+  {
+    title: 'Landing Page - Agencia de Viajes',
+    description:
+      'Landing page de pago para agencia de turismo/viajes, optimizada para presentar servicios, captar clientes y mejorar conversión.',
+    stack: ['React', 'JavaScript', 'UI/UX', 'Landing Design'],
+    demo: '#',
+    repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
+  },
+  {
+    title: 'MindFullSleep (Android)',
+    description:
+      'Aplicación Android para relajación y sueño con sonidos de naturaleza y meditaciones guiadas para mejorar descanso y bienestar.',
+    stack: ['Kotlin', 'Android Studio', 'UX Mobile', 'Audio Playback'],
+    demo: '#',
+    repo: 'https://github.com/Harold1Maldonado/MindFullSleep',
   },
 ]
 
 const embeddedProjects = [
   {
-    title: 'Live Project Embed',
-    url: 'https://sample-service-name-e9kt.onrender.com/',
-    note: 'Use this section to embed live demos, product prototypes, or public project previews.',
+    title: '4Giift - Live Project',
+    url: giftDemoUrl,
+    note: 'Live demo hosted on Render. Open in a new tab for the full experience.',
+  },
+  {
+    title: 'Animal Store - Live Project',
+    url: animalStoreDemoUrl,
+    // Nota de error funcional: algunos sitios en Render bloquean iframes por cabeceras de seguridad.
+    // Si esto pasa, el usuario puede abrir el proyecto con el botón "Open Project".
+    note: 'If iframe is blocked by browser security headers, use the Open Project button.',
   },
 ]
 
 const experience = [
+  {
+    period: 'Mar 2026 — Presente',
+    title: 'Collaborator · Temotiva',
+    description:
+      'Colaborador en Temotiva (https://temotiva.com/), contribuyendo en producto y experiencia digital para “Microprácticas inteligentes diseñadas por expertos para recuperar tu calma en segundos.”',
+  },
   {
     period: '2025 — 2026',
     title: 'Full Stack Developer',
@@ -95,6 +173,34 @@ function SectionHeading({ eyebrow, title, copy }) {
 }
 
 export default function App() {
+  const [lang, setLang] = useState('es')
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
+  const t = translations[lang]
+
+  const handleContactChange = (event) => {
+    const { name, value } = event.target
+    setContactForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleContactSubmit = (event) => {
+    event.preventDefault()
+
+    const subject = encodeURIComponent(`Nuevo mensaje de portfolio - ${contactForm.name || 'Sin nombre'}`)
+    const body = encodeURIComponent(
+      `Nombre: ${contactForm.name || 'No especificado'}\n` +
+      `Email: ${contactForm.email || 'No especificado'}\n\n` +
+      `Mensaje:\n${contactForm.message || 'Sin mensaje'}`,
+    )
+
+    // Nota de error funcional: mailto depende del cliente de correo del navegador/SO.
+    // Si el usuario no tiene un cliente configurado, el botón no abrirá redacción automática.
+    window.location.href = `mailto:haroldmaldonado1@gmail.com?subject=${subject}&body=${body}`
+  }
+
   return (
     <div className="min-h-screen bg-grid bg-[size:42px_42px]">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
@@ -102,12 +208,30 @@ export default function App() {
           <a href="#home" className="text-lg font-semibold tracking-tight text-white">
             Harold<span className="text-sky-400">.</span>
           </a>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={lang === 'en'}
+            onClick={() => setLang((prev) => (prev === 'es' ? 'en' : 'es'))}
+            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white transition hover:bg-white/10 md:hidden"
+          >
+            {t.langSwitch}
+          </button>
           <div className="hidden gap-6 text-sm text-slate-300 md:flex">
-            <a href="#about" className="hover:text-white">About</a>
-            <a href="#stack" className="hover:text-white">Stack</a>
-            <a href="#projects" className="hover:text-white">Projects</a>
-            <a href="#embed" className="hover:text-white">Embeds</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
+            <a href="#about" className="hover:text-white">{t.nav.about}</a>
+            <a href="#stack" className="hover:text-white">{t.nav.stack}</a>
+            <a href="#projects" className="hover:text-white">{t.nav.projects}</a>
+            <a href="#embed" className="hover:text-white">{t.nav.embeds}</a>
+            <a href="#contact" className="hover:text-white">{t.nav.contact}</a>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={lang === 'en'}
+              onClick={() => setLang((prev) => (prev === 'es' ? 'en' : 'es'))}
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white transition hover:bg-white/10"
+            >
+              {t.langSwitch}
+            </button>
           </div>
         </nav>
       </header>
@@ -121,20 +245,20 @@ export default function App() {
             className="space-y-8"
           >
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm text-sky-300">
-              <Rocket size={16} /> Full Stack Developer · Madrid
+              <Rocket size={16} /> {t.hero.role}
             </motion.div>
             <motion.h1 variants={fadeUp} className="max-w-4xl text-5xl font-bold tracking-tight text-white md:text-7xl">
-              Building modern web experiences with React, Python, Flask, and a growing focus on AI.
+              {t.hero.title}
             </motion.h1>
             <motion.p variants={fadeUp} className="max-w-2xl text-lg leading-8 text-slate-300">
-              I create full stack applications with strong fundamentals in frontend and backend development, and I am currently expanding into Next.js, Generative AI, agentic systems, and Kotlin for Android.
+              {t.hero.copy}
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
               <a href="#projects" className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400">
-                View Projects <ArrowRight size={18} />
+                {t.hero.viewProjects} <ArrowRight size={18} />
               </a>
               <a href="#contact" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
-                Contact Me
+                {t.hero.contactMe}
               </a>
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 text-slate-300">
@@ -238,46 +362,57 @@ export default function App() {
             copy="Use this section to highlight your best work, focusing on technical decisions, real functionality, and your contribution to the final product."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {projects.map((project, index) => (
-              <motion.article
-                key={project.title}
-                className="card p-8"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-sky-400">{project.type || 'Project'}</p>
-                    <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
+            {projects.map((project, index) => {
+              const hasValidDemo = project.demo && project.demo !== '#'
+
+              return (
+                <motion.article
+                  key={project.title}
+                  className="card p-8"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.2em] text-sky-400">{project.type || t.project.label}</p>
+                      <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
+                    </div>
+                    <Code2 className="text-slate-400" />
                   </div>
-                  <Code2 className="text-slate-400" />
-                </div>
-                <p className="mt-5 leading-7 text-slate-300">{project.description}</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {project.stack.map((item) => (
-                    <span key={item} className="badge">{item}</span>
-                  ))}
-                </div>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 font-medium text-slate-950 transition hover:bg-slate-200">
-                    Live Demo <ExternalLink size={16} />
-                  </a>
-                  <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">
-                    Repository <Github size={16} />
-                  </a>
-                </div>
-              </motion.article>
-            ))}
+                  <p className="mt-5 leading-7 text-slate-300">{project.description}</p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {project.stack.map((item) => (
+                      <span key={item} className="badge">{item}</span>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    {hasValidDemo ? (
+                      <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 font-medium text-slate-950 transition hover:bg-slate-200">
+                        {t.project.liveDemo} <ExternalLink size={16} />
+                      </a>
+                    ) : (
+                      // Nota de error funcional: evita enlaces rotos cuando el demo todavía no está publicado.
+                      <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-slate-500/40 px-5 py-3 font-medium text-slate-200">
+                        {t.project.pending}
+                      </span>
+                    )}
+                    <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">
+                      {t.project.repo} <Github size={16} />
+                    </a>
+                  </div>
+                </motion.article>
+              )
+            })}
           </div>
         </section>
 
         <section id="embed" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
           <SectionHeading
             eyebrow="Project Embeds"
-            title="A dedicated area to embed your live projects."
-            copy="When a project allows iframe embedding, you can preview it directly here. If a site blocks embedding, replace it with a browser mockup image and external link."
+            title="Live projects"
+            copy="For reliability, demos open in a new tab. This avoids blank iframe previews when hosting providers block embedding."
           />
           <div className="mt-12 space-y-8">
             {embeddedProjects.map((item, index) => (
@@ -298,14 +433,15 @@ export default function App() {
                     Open Project <ExternalLink size={16} />
                   </a>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900">
-                  <iframe
-                    src={item.url}
-                    title={item.title}
-                    className="h-[420px] w-full"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
+                <div className="rounded-2xl border border-dashed border-white/20 bg-slate-900/80 p-6">
+                  {/* Nota de error funcional:
+                      Varios despliegues en Render envían cabeceras X-Frame-Options/CSP
+                      y eso puede causar iframes en blanco aunque el proyecto sí funcione.
+                      Se usa apertura en nueva pestaña para evitar falsa impresión de caída. */}
+                  <p className="text-sm leading-6 text-slate-300">
+                    Preview mode disabled to avoid blank screens caused by iframe restrictions.
+                    Use <span className="font-semibold text-white">Open Project</span> to view the live app.
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -380,17 +516,45 @@ export default function App() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-400">Contact</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-400">{t.contact.eyebrow}</p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">
-              Let’s build something valuable.
+              {t.contact.title}
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
-              I am looking for opportunities where I can contribute as a full stack developer, keep sharpening my frontend and backend skills, and grow into AI-powered product development.
+              {t.contact.copy}
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a href="mailto:haroldmaldonado1@gmail.com" className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400">
-                <Mail size={18} /> haroldmaldonado1@gmail.com
-              </a>
+            <form className="mt-8 grid gap-4 md:grid-cols-2" onSubmit={handleContactSubmit}>
+              <input
+                type="text"
+                name="name"
+                value={contactForm.name}
+                onChange={handleContactChange}
+                placeholder={t.contact.name}
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={contactForm.email}
+                onChange={handleContactChange}
+                placeholder={t.contact.email}
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400"
+                required
+              />
+              <textarea
+                name="message"
+                value={contactForm.message}
+                onChange={handleContactChange}
+                placeholder={t.contact.message}
+                className="min-h-32 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 md:col-span-2"
+                required
+              />
+              <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400 md:col-span-2 md:justify-self-start">
+                <Mail size={18} /> {t.contact.send}
+              </button>
+            </form>
+            <div className="mt-6 flex flex-wrap gap-4">
               <a href="https://www.linkedin.com/in/harold-maldonado/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
                 <Linkedin size={18} /> LinkedIn
               </a>
