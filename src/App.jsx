@@ -38,52 +38,7 @@ const techGroups = [
 ]
 
 const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
-const animalStoreDemoUrl = 'https://tiendaanimal.onrender.com/'
-
-const translations = {
-  en: {
-    nav: { about: 'About', stack: 'Stack', projects: 'Projects', embeds: 'Embeds', contact: 'Contact' },
-    hero: {
-      role: 'Full Stack Developer · Madrid',
-      title: 'Building modern web experiences with React, Python, Flask, and a growing focus on AI.',
-      copy: 'I create full stack applications with strong fundamentals in frontend and backend development, and I am currently expanding into Next.js, Generative AI, agentic systems, and Kotlin for Android.',
-      viewProjects: 'View Projects',
-      contactMe: 'Contact Me',
-    },
-    project: { liveDemo: 'Live Demo', repo: 'Repository', pending: 'Demo Pending', label: 'Project' },
-    contact: {
-      eyebrow: 'Contact',
-      title: 'Let’s build something valuable.',
-      copy: 'I am looking for opportunities where I can contribute as a full stack developer, keep sharpening my frontend and backend skills, and grow into AI-powered product development.',
-      name: 'Your name',
-      email: 'Your email',
-      message: 'Write your message',
-      send: 'Send Message',
-    },
-    langSwitch: 'ES / EN',
-  },
-  es: {
-    nav: { about: 'Sobre mí', stack: 'Tecnologías', projects: 'Proyectos', embeds: 'Embeds', contact: 'Contacto' },
-    hero: {
-      role: 'Desarrollador Full Stack · Madrid',
-      title: 'Construyendo experiencias web modernas con React, Python, Flask y foco creciente en IA.',
-      copy: 'Creo aplicaciones full stack con bases sólidas en frontend y backend, y actualmente sigo creciendo en Next.js, IA generativa, sistemas agénticos y Kotlin para Android.',
-      viewProjects: 'Ver Proyectos',
-      contactMe: 'Contáctame',
-    },
-    project: { liveDemo: 'Demo en vivo', repo: 'Repositorio', pending: 'Demo pendiente', label: 'Proyecto' },
-    contact: {
-      eyebrow: 'Contacto',
-      title: 'Construyamos algo valioso.',
-      copy: 'Estoy buscando oportunidades donde pueda aportar como desarrollador full stack, seguir perfeccionando frontend y backend, y crecer en productos potenciados por IA.',
-      name: 'Tu nombre',
-      email: 'Tu correo',
-      message: 'Escribe tu mensaje',
-      send: 'Enviar mensaje',
-    },
-    langSwitch: 'EN / ES',
-  },
-}
+const animalStoreDemoUrl = 'https://animal-store.onrender.com/'
 
 const projects = [
   {
@@ -173,13 +128,11 @@ function SectionHeading({ eyebrow, title, copy }) {
 }
 
 export default function App() {
-  const [lang, setLang] = useState('es')
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
     message: '',
   })
-  const t = translations[lang]
 
   const handleContactChange = (event) => {
     const { name, value } = event.target
@@ -376,7 +329,7 @@ export default function App() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-sm uppercase tracking-[0.2em] text-sky-400">{project.type || t.project.label}</p>
+                      <p className="text-sm uppercase tracking-[0.2em] text-sky-400">{project.type || 'Project'}</p>
                       <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
                     </div>
                     <Code2 className="text-slate-400" />
@@ -390,16 +343,16 @@ export default function App() {
                   <div className="mt-8 flex flex-wrap gap-4">
                     {hasValidDemo ? (
                       <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 font-medium text-slate-950 transition hover:bg-slate-200">
-                        {t.project.liveDemo} <ExternalLink size={16} />
+                        Live Demo <ExternalLink size={16} />
                       </a>
                     ) : (
                       // Nota de error funcional: evita enlaces rotos cuando el demo todavía no está publicado.
                       <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-slate-500/40 px-5 py-3 font-medium text-slate-200">
-                        {t.project.pending}
+                        Demo Pending
                       </span>
                     )}
                     <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">
-                      {t.project.repo} <Github size={16} />
+                      Repository <Github size={16} />
                     </a>
                   </div>
                 </motion.article>
@@ -528,7 +481,7 @@ export default function App() {
                 name="name"
                 value={contactForm.name}
                 onChange={handleContactChange}
-                placeholder={t.contact.name}
+                placeholder="Tu nombre"
                 className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400"
                 required
               />
@@ -537,7 +490,7 @@ export default function App() {
                 name="email"
                 value={contactForm.email}
                 onChange={handleContactChange}
-                placeholder={t.contact.email}
+                placeholder="Tu correo"
                 className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400"
                 required
               />
@@ -545,15 +498,18 @@ export default function App() {
                 name="message"
                 value={contactForm.message}
                 onChange={handleContactChange}
-                placeholder={t.contact.message}
+                placeholder="Escribe tu mensaje"
                 className="min-h-32 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 md:col-span-2"
                 required
               />
               <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400 md:col-span-2 md:justify-self-start">
-                <Mail size={18} /> {t.contact.send}
+                <Mail size={18} /> Enviar a haroldmaldonado1@gmail.com
               </button>
             </form>
             <div className="mt-6 flex flex-wrap gap-4">
+              <a href="mailto:haroldmaldonado1@gmail.com" className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400">
+                <Mail size={18} /> haroldmaldonado1@gmail.com
+              </a>
               <a href="https://www.linkedin.com/in/harold-maldonado/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
                 <Linkedin size={18} /> LinkedIn
               </a>
