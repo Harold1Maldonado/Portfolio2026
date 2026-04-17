@@ -92,6 +92,12 @@ const embeddedProjects = [
 
 const experience = [
   {
+    period: 'Mar 2026 — Presente',
+    title: 'Collaborator · Temotiva',
+    description:
+      'Colaborador en Temotiva (https://temotiva.com/), contribuyendo en producto y experiencia digital para “Microprácticas inteligentes diseñadas por expertos para recuperar tu calma en segundos.”',
+  },
+  {
     period: '2025 — 2026',
     title: 'Full Stack Developer',
     description:
@@ -155,12 +161,30 @@ export default function App() {
           <a href="#home" className="text-lg font-semibold tracking-tight text-white">
             Harold<span className="text-sky-400">.</span>
           </a>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={lang === 'en'}
+            onClick={() => setLang((prev) => (prev === 'es' ? 'en' : 'es'))}
+            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white transition hover:bg-white/10 md:hidden"
+          >
+            {t.langSwitch}
+          </button>
           <div className="hidden gap-6 text-sm text-slate-300 md:flex">
-            <a href="#about" className="hover:text-white">About</a>
-            <a href="#stack" className="hover:text-white">Stack</a>
-            <a href="#projects" className="hover:text-white">Projects</a>
-            <a href="#embed" className="hover:text-white">Embeds</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
+            <a href="#about" className="hover:text-white">{t.nav.about}</a>
+            <a href="#stack" className="hover:text-white">{t.nav.stack}</a>
+            <a href="#projects" className="hover:text-white">{t.nav.projects}</a>
+            <a href="#embed" className="hover:text-white">{t.nav.embeds}</a>
+            <a href="#contact" className="hover:text-white">{t.nav.contact}</a>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={lang === 'en'}
+              onClick={() => setLang((prev) => (prev === 'es' ? 'en' : 'es'))}
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white transition hover:bg-white/10"
+            >
+              {t.langSwitch}
+            </button>
           </div>
         </nav>
       </header>
@@ -174,20 +198,20 @@ export default function App() {
             className="space-y-8"
           >
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm text-sky-300">
-              <Rocket size={16} /> Full Stack Developer · Madrid
+              <Rocket size={16} /> {t.hero.role}
             </motion.div>
             <motion.h1 variants={fadeUp} className="max-w-4xl text-5xl font-bold tracking-tight text-white md:text-7xl">
-              Building modern web experiences with React, Python, Flask, and a growing focus on AI.
+              {t.hero.title}
             </motion.h1>
             <motion.p variants={fadeUp} className="max-w-2xl text-lg leading-8 text-slate-300">
-              I create full stack applications with strong fundamentals in frontend and backend development, and I am currently expanding into Next.js, Generative AI, agentic systems, and Kotlin for Android.
+              {t.hero.copy}
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
               <a href="#projects" className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400">
-                View Projects <ArrowRight size={18} />
+                {t.hero.viewProjects} <ArrowRight size={18} />
               </a>
               <a href="#contact" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
-                Contact Me
+                {t.hero.contactMe}
               </a>
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 text-slate-300">
@@ -444,12 +468,12 @@ export default function App() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-400">Contact</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-400">{t.contact.eyebrow}</p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">
-              Let’s build something valuable.
+              {t.contact.title}
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
-              I am looking for opportunities where I can contribute as a full stack developer, keep sharpening my frontend and backend skills, and grow into AI-powered product development.
+              {t.contact.copy}
             </p>
             <form className="mt-8 grid gap-4 md:grid-cols-2" onSubmit={handleContactSubmit}>
               <input
