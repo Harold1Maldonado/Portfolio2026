@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import profilePhoto from './foto perfil.png'
 import {
   ArrowRight,
   BrainCircuit,
@@ -82,7 +83,7 @@ const translations = {
             'Full stack application for generating personalized gift ideas. Built with Python, Flask, JavaScript, React, SQLAlchemy, and third-party integrations.',
           stack: ['React', 'JavaScript', 'Python', 'Flask', 'SQLAlchemy', 'Gemini API'],
           demo: giftDemoUrl,
-          repo: 'https://github.com/Harold1Maldonado',
+          repo: 'https://github.com/HA-HA-Team/Final_Project-4Giifts',
         },
         {
           title: 'Animal Store',
@@ -90,7 +91,7 @@ const translations = {
             'E-commerce style project focused on pet products with product catalog, shopping flow, and responsive UI for real users.',
           stack: ['React', 'JavaScript', 'REST API', 'Responsive UI'],
           demo: animalStoreDemoUrl,
-          repo: 'https://github.com/Harold1Maldonado',
+          repo: 'https://github.com/HA-HA-Team/Proyecto-TiendaAnimal',
         },
         {
           title: 'Landing Page - Travel Agency',
@@ -98,7 +99,7 @@ const translations = {
             'Paid landing page for a travel agency, optimized to present services, attract clients, and improve conversion.',
           stack: ['React', 'JavaScript', 'UI/UX', 'Landing Design'],
           demo: '#',
-          repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
+          repo: '#',
         },
         {
           title: 'MindFullSleep (Android)',
@@ -106,7 +107,7 @@ const translations = {
             'Android app for relaxation and sleep with nature sounds and guided meditations to improve rest and wellbeing.',
           stack: ['Kotlin', 'Android Studio', 'UX Mobile', 'Audio Playback'],
           demo: '#',
-          repo: 'https://github.com/Harold1Maldonado/MindFullSleep',
+          repo: '#',
         },
       ],
     },
@@ -254,7 +255,7 @@ const translations = {
             'Aplicación full stack para generar ideas de regalos personalizadas. Construida con Python, Flask, JavaScript, React, SQLAlchemy e integraciones de terceros.',
           stack: ['React', 'JavaScript', 'Python', 'Flask', 'SQLAlchemy', 'Gemini API'],
           demo: giftDemoUrl,
-          repo: 'https://github.com/Harold1Maldonado',
+          repo: 'https://github.com/HA-HA-Team/Final_Project-4Giifts',
         },
         {
           title: 'Tienda Animal',
@@ -262,7 +263,7 @@ const translations = {
             'Proyecto estilo e-commerce enfocado en productos para mascotas, con catálogo de productos, flujo de compra e interfaz responsive para usuarios reales.',
           stack: ['React', 'JavaScript', 'API REST', 'UI Responsive'],
           demo: animalStoreDemoUrl,
-          repo: 'https://github.com/Harold1Maldonado',
+          repo: 'https://github.com/HA-HA-Team/Proyecto-TiendaAnimal',
         },
         {
           title: 'Landing Page - Agencia de Viajes',
@@ -270,7 +271,7 @@ const translations = {
             'Landing page de pago para agencia de turismo/viajes, optimizada para presentar servicios, captar clientes y mejorar conversión.',
           stack: ['React', 'JavaScript', 'UI/UX', 'Diseño Landing'],
           demo: '#',
-          repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
+          repo: '#',
         },
         {
           title: 'MindFullSleep (Android)',
@@ -278,7 +279,7 @@ const translations = {
             'Aplicación Android para relajación y sueño con sonidos de naturaleza y meditaciones guiadas para mejorar descanso y bienestar.',
           stack: ['Kotlin', 'Android Studio', 'UX Mobile', 'Reproducción de Audio'],
           demo: '#',
-          repo: 'https://github.com/Harold1Maldonado/MindFullSleep',
+          repo: '#',
         },
       ],
     },
@@ -423,37 +424,16 @@ export default function App() {
       setContactForm({ name: '', email: '', message: '' })
       return
     } catch (_error) {
-      // Nota de error funcional:
-      // Fallback de continuidad: si falla envío HTTP, intentamos mailto para no perder el mensaje.
       setSubmitStatus('error')
       setSubmitMessage(t.contact.sendError)
     }
-
-    const subject = encodeURIComponent(`${t.contact.mailSubject} - ${contactForm.name || t.contact.noName}`)
-    const body = encodeURIComponent(
-      `Nombre/Name: ${contactForm.name || t.contact.notProvided}\n` +
-      `Email: ${contactForm.email || t.contact.notProvided}\n\n` +
-      `Mensaje/Message:\n${contactForm.message || t.contact.noMessage}`,
-    )
-
-    // Nota de error funcional: mailto depende del cliente de correo del navegador/SO.
-    // Si el usuario no tiene cliente configurado, no se abrirá redacción automática.
-    // Se deja fallback con alert para avisar al usuario final del problema.
-    const mailtoUrl = `mailto:haroldmaldonado1@gmail.com?subject=${subject}&body=${body}`
-    window.location.href = mailtoUrl
-
-    setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        alert(t.contact.openMailError)
-      }
-    }, 1200)
   }
 
   return (
     <div className="min-h-screen bg-grid bg-[size:42px_42px]">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#home" className="text-lg font-semibold tracking-tight text-white">Harold<span className="text-sky-400">.</span></a>
+          <a href="#home" className="text-lg font-semibold tracking-tight text-white">Harold Maldonado<span className="text-sky-400">.</span></a>
           <button type="button" role="switch" aria-checked={lang === 'en'} onClick={() => setLang((prev) => (prev === 'es' ? 'en' : 'es'))} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white transition hover:bg-white/10 md:hidden">
             {t.langSwitch}
           </button>
@@ -473,6 +453,9 @@ export default function App() {
       <main id="home">
         <section className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-32">
           <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.12 } } }} className="space-y-8">
+            <motion.div variants={fadeUp}>
+              <img src={profilePhoto} alt="Harold Maldonado" className="h-60 w-60 rounded-full object-cover object-[center_15%] ring-2 ring-sky-400/40 ring-offset-4 ring-offset-slate-950" />
+            </motion.div>
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm text-sky-300"><Rocket size={16} /> {t.hero.role}</motion.div>
             <motion.h1 variants={fadeUp} className="max-w-4xl text-5xl font-bold tracking-tight text-white md:text-7xl">{t.hero.title}</motion.h1>
             <motion.p variants={fadeUp} className="max-w-2xl text-lg leading-8 text-slate-300">{t.hero.copy}</motion.p>
@@ -506,9 +489,18 @@ export default function App() {
         </section>
 
         <section id="about" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-            <SectionHeading eyebrow={t.about.eyebrow} title={t.about.title} copy={t.about.copy} />
-            <div className="card p-8 text-slate-300"><p className="leading-7">{t.about.body}</p></div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} className="grid gap-8 lg:grid-cols-[220px_1fr]">
+            <div className="card flex flex-col items-center gap-5 p-8">
+              <img src={profilePhoto} alt="Harold Maldonado" className="h-40 w-40 rounded-full object-cover ring-2 ring-sky-400/40 ring-offset-4 ring-offset-slate-900" />
+              <div className="text-center">
+                <p className="text-lg font-semibold text-white">Harold Maldonado</p>
+                <p className="text-sm text-sky-400">{t.hero.role}</p>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <SectionHeading eyebrow={t.about.eyebrow} title={t.about.title} copy={t.about.copy} />
+              <div className="card p-8 text-slate-300"><p className="leading-7">{t.about.body}</p></div>
+            </div>
           </motion.div>
         </section>
 
@@ -546,10 +538,13 @@ export default function App() {
                     {hasValidDemo ? (
                       <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 font-medium text-slate-950 transition hover:bg-slate-200">{t.project.liveDemo} <ExternalLink size={16} /></a>
                     ) : (
-                      // Nota de error funcional: evita enlaces rotos cuando el demo todavía no está publicado.
                       <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-slate-500/40 px-5 py-3 font-medium text-slate-200">{t.project.pending}</span>
                     )}
-                    <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">{t.project.repo} <Github size={16} /></a>
+                    {project.repo !== '#' ? (
+                      <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10">{t.project.repo} <Github size={16} /></a>
+                    ) : (
+                      <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-slate-500">{t.project.repo} <Github size={16} /></span>
+                    )}
                   </div>
                 </motion.article>
               )
