@@ -1,5 +1,6 @@
 const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
 const animalStoreDemoUrl = 'https://tiendaanimal.onrender.com/'
+const moroccoTourismUrl = 'https://morocco-tourism-web.onrender.com'
 
 export const translations = {
   en: {
@@ -83,8 +84,8 @@ export const translations = {
           description:
             'Paid landing page for a travel agency, optimized to present services, attract clients, and improve conversion.',
           stack: ['React', 'JavaScript', 'UI/UX', 'Landing Design'],
-          demo: '#',
-          repo: '#',
+          demo: moroccoTourismUrl,
+          repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
         },
         {
           title: 'MindFullSleep (Android)',
@@ -261,8 +262,8 @@ export const translations = {
           description:
             'Landing page de pago para agencia de turismo/viajes, optimizada para presentar servicios, captar clientes y mejorar conversión.',
           stack: ['React', 'JavaScript', 'UI/UX', 'Diseño Landing'],
-          demo: '#',
-          repo: '#',
+          demo: moroccoTourismUrl,
+          repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
         },
         {
           title: 'MindFullSleep (Android)',
