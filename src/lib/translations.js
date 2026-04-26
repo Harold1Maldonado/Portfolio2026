@@ -1,6 +1,7 @@
 const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
 const animalStoreDemoUrl = 'https://tiendaanimal.onrender.com/'
 const moroccoTourismUrl = 'https://morocco-tourism-web.onrender.com'
+const jtransnoroesteDemoUrl = 'https://jtransnoroeste.onrender.com'
 
 export const translations = {
   en: {
@@ -86,6 +87,14 @@ export const translations = {
           stack: ['React', 'JavaScript', 'UI/UX', 'Landing Design'],
           demo: moroccoTourismUrl,
           repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
+        },
+        {
+          title: 'Jtransnoroeste',
+          description:
+            'Professional landing page for a motorcycle transport company. Covers door-to-door service, groupage, and dealer logistics across mainland Spain.',
+          stack: ['React', 'Vite', 'JavaScript', 'Landing Design'],
+          demo: jtransnoroesteDemoUrl,
+          repo: 'https://github.com/Harold1Maldonado/Jtransnoroeste',
         },
         {
           title: 'MindFullSleep (Android)',
@@ -264,6 +273,14 @@ export const translations = {
           stack: ['React', 'JavaScript', 'UI/UX', 'Diseño Landing'],
           demo: moroccoTourismUrl,
           repo: 'https://github.com/Harold1Maldonado/LandingPage-AgenciaViajes',
+        },
+        {
+          title: 'Jtransnoroeste',
+          description:
+            'Landing page profesional para empresa de transporte de motos. Cubre servicio puerta a puerta, grupaje y logística para concesionarios en toda España peninsular.',
+          stack: ['React', 'Vite', 'JavaScript', 'Diseño Landing'],
+          demo: jtransnoroesteDemoUrl,
+          repo: 'https://github.com/Harold1Maldonado/Jtransnoroeste',
         },
         {
           title: 'MindFullSleep (Android)',
