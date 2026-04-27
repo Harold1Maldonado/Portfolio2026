@@ -2,6 +2,7 @@ const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
 const animalStoreDemoUrl = 'https://tiendaanimal.onrender.com/'
 const moroccoTourismUrl = 'https://morocco-tourism-web.onrender.com'
 const jtransnoroesteDemoUrl = 'https://jtransnoroeste.onrender.com'
+const presenciaDigitalProUrl = 'https://presenciadigitalpro.es/'
 
 export const translations = {
   en: {
@@ -95,6 +96,14 @@ export const translations = {
           stack: ['React', 'Vite', 'JavaScript', 'Landing Design'],
           demo: jtransnoroesteDemoUrl,
           repo: 'https://github.com/Harold1Maldonado/Jtransnoroeste',
+        },
+        {
+          title: 'Presencia Digital Pro',
+          description:
+            'Professional landing page for a digital services agency targeting local businesses and freelancers. Built with Next.js 14, Framer Motion, and Tailwind CSS, with animated sections, pricing packages, and a conversion-focused contact form.',
+          stack: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'Landing Design'],
+          demo: presenciaDigitalProUrl,
+          repo: '#',
         },
         {
           title: 'MindFullSleep (Android)',
@@ -281,6 +290,14 @@ export const translations = {
           stack: ['React', 'Vite', 'JavaScript', 'Diseño Landing'],
           demo: jtransnoroesteDemoUrl,
           repo: 'https://github.com/Harold1Maldonado/Jtransnoroeste',
+        },
+        {
+          title: 'Presencia Digital Pro',
+          description:
+            'Landing page profesional para agencia de servicios digitales dirigida a negocios locales y autónomos. Construida con Next.js 14, Framer Motion y Tailwind CSS, con secciones animadas, paquetes de precios y formulario optimizado para conversión.',
+          stack: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'Diseño Landing'],
+          demo: presenciaDigitalProUrl,
+          repo: '#',
         },
         {
           title: 'MindFullSleep (Android)',
