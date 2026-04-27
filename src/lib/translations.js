@@ -1,7 +1,7 @@
 const giftDemoUrl = 'https://sample-service-name-e9kt.onrender.com/'
 const animalStoreDemoUrl = 'https://tiendaanimal.onrender.com/'
 const moroccoTourismUrl = 'https://morocco-tourism-web.onrender.com'
-const jtransnoroesteDemoUrl = 'https://jtransnoroeste.onrender.com'
+const jtransnoroesteDemoUrl = 'https://jtransnoroeste.com/'
 const presenciaDigitalProUrl = 'https://presenciadigitalpro.es/'
 
 export const translations = {
@@ -92,7 +92,7 @@ export const translations = {
         {
           title: 'Jtransnoroeste',
           description:
-            'Professional landing page for a motorcycle transport company. Covers door-to-door service, groupage, and dealer logistics across mainland Spain.',
+            'Landing page development for a nationwide motorcycle transport company in Spain.',
           stack: ['React', 'Vite', 'JavaScript', 'Landing Design'],
           demo: jtransnoroesteDemoUrl,
           repo: 'https://github.com/Harold1Maldonado/Jtransnoroeste',
@@ -286,7 +286,7 @@ export const translations = {
         {
           title: 'Jtransnoroeste',
           description:
-            'Landing page profesional para empresa de transporte de motos. Cubre servicio puerta a puerta, grupaje y logística para concesionarios en toda España peninsular.',
+            'Desarrollo de landing page para empresa de transporte de motos a nivel nacional en España.',
           stack: ['React', 'Vite', 'JavaScript', 'Diseño Landing'],
           demo: jtransnoroesteDemoUrl,
           repo: 'https://github.com/Harold1Maldonado/Jtransnoroeste',
